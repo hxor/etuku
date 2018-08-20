@@ -20,7 +20,7 @@ class CreateCommodityPricesTable extends Migration
             $table->integer('commodity_id')->unsigned();
             $table->foreign('commodity_id')->references('id')->on('commodities');
             $table->integer('market_id')->unsigned();
-            $table->foreign('market_id')->refrences('id')->on('markets');
+            $table->foreign('market_id')->references('id')->on('markets');
             $table->bigInteger('price');
             $table->bigInteger('gap');
             $table->date('date');
