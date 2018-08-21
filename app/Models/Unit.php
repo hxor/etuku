@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TypeCommodity extends Model
+class Unit extends Model
 {
     protected $fillable = [
         'slug', 'title'
     ];
 
-    public function comCat()
+    public function com()
     {
-        return $this->hasMany(CommodityCategories::class);
+        return $this->hasMany(Commodity::class);
     }
 }

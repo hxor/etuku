@@ -22,9 +22,9 @@ class CreateCommodityPricesTable extends Migration
             $table->integer('market_id')->unsigned();
             $table->foreign('market_id')->references('id')->on('markets');
             $table->bigInteger('price');
-            $table->bigInteger('gap');
+            $table->bigInteger('gap')->default(0);
             $table->date('date');
-            $table->enum('status', ['up', 'down', 'equal']);
+            $table->enum('status', ['up', 'down', 'equal'])->nullable();
             $table->timestamps();
         });
     }

@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Commodity extends Model
 {
     protected $fillable = [
-        'type_commodity_id', 'slug', 'title'
+        'commodity_category_id', 'unit_id', 'slug', 'title'
     ];
 
-    public function typeCom()
+    public function comCat()
     {
-        return $this->belongsTo(TypeCommodity);
+        return $this->belongsTo(CommodityCategory::class);
     }
 
     public function comPrice()

@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+   Route::resource('typecom', 'TypeComController');
+   Route::resource('typeprice', 'TypePriceController');
+   Route::resource('market', 'MarketController');
+   Route::resource('unit', 'UnitController');
+   Route::resource('commodity', 'CommodityController');
+   Route::resource('comprice', 'CompriceController');
+});
