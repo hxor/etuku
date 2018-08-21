@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
    Route::resource('typeprice', 'TypePriceController');
    Route::resource('market', 'MarketController');
    Route::resource('unit', 'UnitController');
+   Route::resource('comcat', 'ComcatController');
    Route::resource('commodity', 'CommodityController');
    Route::resource('comprice', 'CompriceController');
 });

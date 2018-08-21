@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Commodity;
+use App\Models\CommodityCategory as Comcat;
 
-class CommodityRequest extends FormRequest
+class ComcatRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CommodityRequest extends FormRequest
      */
     public function rules()
     {
-        $data = Commodity::find($this->commodity);
+        $data = Comcat::find($this->comcat);
 
         switch ($this->method()) {
             case 'GET':
@@ -37,7 +37,7 @@ class CommodityRequest extends FormRequest
                     return [
                         'slug' => 'required|string|unique:commodities,slug',
                         'title' => 'required|string|min:2|unique:commodities,title',
-                        'commodity_category_id' => 'required|integer'
+                        'type_commodity_id' => 'required|integer'
                     ];
                 }
             case 'PUT':
@@ -45,7 +45,7 @@ class CommodityRequest extends FormRequest
                     return [
                         'slug' => 'required|string|unique:commodities,slug,' . $data->id,
                         'title' => 'required|string|min:2|unique:commodities,title,' . $data->id,
-                        'commodity_category_id' => 'required|integer'
+                        'type_commodity_id' => 'required|integer'
                     ];
                 }
             case 'PATCH':
@@ -53,7 +53,7 @@ class CommodityRequest extends FormRequest
                     return [
                         'slug' => 'required|string|unique:commodities,slug,' . $data->id,
                         'title' => 'required|string|min:2|unique:commodities,title,' . $data->id,
-                        'commodity_category_id' => 'required|integer'
+                        'type_commodity_id' => 'required|integer'
                     ];
                 }
             default:
