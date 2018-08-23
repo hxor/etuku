@@ -15,8 +15,27 @@ class Commodity extends Model
         return $this->belongsTo(CommodityCategory::class);
     }
 
+    public function comUnit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
     public function comPrice()
     {
         return $this->hasMany(CommodityPrice::class);
     }
+
+    public function comLastPrice()
+    {
+        return $this->hasOne(CommodityPrice::class);
+    }
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];
 }

@@ -14,4 +14,13 @@ class Market extends Model
     {
         return $this->hasMany(CommodityPrice::class);
     }
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];
 }
