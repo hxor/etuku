@@ -20,9 +20,10 @@ class CompriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug)
     {
-        //
+        $data = $this->srv->getTypePrice($slug);
+        return view('pages.comprice.index', compact('data'));
     }
 
     /**
@@ -30,9 +31,10 @@ class CompriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($slug)
     {
-        //
+        $data = $this->srv->getTypePrice($slug);
+        return view('pages.comprice.create', compact('data'));
     }
 
     /**
@@ -41,9 +43,15 @@ class CompriceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompriceRequest $request)
+    public function store(CompriceRequest $request, $slug)
     {
-        return $this->srv->create($request);
+        $result = $this->srv->create($request);   
+        if ($result['success']) {
+            $data = $this->srv->getTypePrice($slug);
+            return redirect()->route('admin.price.index', $data->slug);
+        } else {
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
@@ -63,9 +71,11 @@ class CompriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug, $id)
     {
-        //
+        $data = $this->srv->getTypePrice($slug);
+        $model = $this->srv->find($id);
+        return view('pages.comprice.edit', compact('data', 'model'));
     }
 
     /**
@@ -75,9 +85,15 @@ class CompriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CompriceRequest $request, $id)
+    public function update(CompriceRequest $request, $slug, $id)
     {
-        return $this->srv->update($request, $id);
+        $result = $this->srv->update($request, $id);
+        if ($result['success']) {
+            $data = $this->srv->getTypePrice($slug);
+            return redirect()->route('admin.price.index', $data->slug);
+        } else {
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
@@ -86,8 +102,22 @@ class CompriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug, $id)
     {
-        return $this->srv->delete($id);
+        $data = $this->srv->getTypePrice($slug);
+        $result = $this->srv->delete($id);
+        if ($result['success']) {
+            return redirect()->route('admin.price.index', $data->slug);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Datatable API
+     */
+    public function dataTable($slug)
+    {
+        return $this->srv->getTable($slug);
     }
 }

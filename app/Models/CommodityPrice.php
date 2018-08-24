@@ -13,17 +13,17 @@ class CommodityPrice extends Model
 
     public function typePrice()
     {
-        return $this->belongsTo(TypePrice::class);
+        return $this->belongsTo(TypePrice::class, 'type_price_id');
     }
 
     public function com()
     {
-        return $this->belongsTo(Commodity::class);
+        return $this->belongsTo(Commodity::class, 'commodity_id');
     }
 
     public function market()
     {
-        return $this->belongsTo(Market::class);
+        return $this->belongsTo(Market::class, 'market_id');
     }
 
     /**

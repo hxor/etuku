@@ -22,7 +22,7 @@ class TypeComController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.typecom.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class TypeComController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.typecom.create');
     }
 
     /**
@@ -43,7 +43,8 @@ class TypeComController extends Controller
      */
     public function store(TypeComRequest $request)
     {
-        return $this->srv->create($request);
+        $result = $this->srv->create($request);
+        if ($result) return redirect()->route('admin.typecom.index');
     }
 
     /**
@@ -65,7 +66,8 @@ class TypeComController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->srv->find($id);
+        return view('pages.typecom.edit', compact('data'));
     }
 
     /**
@@ -77,7 +79,8 @@ class TypeComController extends Controller
      */
     public function update(TypeComRequest $request, $id)
     {
-        return $this->srv->update($request, $id);
+        $result = $this->srv->update($request, $id);
+        if ($result) return redirect()->route('admin.typecom.index');
     }
 
     /**
@@ -88,6 +91,15 @@ class TypeComController extends Controller
      */
     public function destroy($id)
     {
-        return $this->srv->delete($id);
+        $result = $this->srv->delete($id);
+        if ($result) return redirect()->route('admin.typecom.index');
+    }
+
+    /**
+     * Datatable API
+     */
+    public function dataTable()
+    {
+        return $this->srv->getTable();
     }
 }

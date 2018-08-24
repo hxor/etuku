@@ -26,6 +26,11 @@ class ComcatService extends Services
         }
     }
 
+    public function find($id)
+    {
+        return $data = Comcat::find($id);
+    }
+
     public function read($id)
     {
         $data = Comcat::find($id);
@@ -49,7 +54,7 @@ class ComcatService extends Services
     {
         $data = $this->read($id);
         if ($data) {
-            $update = Comcat::where('id', $id)->update($request->all());
+            $update = Comcat::where('id', $id)->update($request->except(['_method', '_token']));
             if ($update) {
                 return response()->json([
                     'success' => true,
@@ -97,5 +102,22 @@ class ComcatService extends Services
                 'data' => ''
             ], 404);
         }
+    }
+
+    public function getTable()
+    {
+        $model = Comcat::with('typeCom');
+        return $this->dataTable($model)
+            ->addColumn('action', function ($model) {
+                return view('layouts.partials._action', [
+                    'model' => $model,
+                    'show_url' => route('admin.comcat.show', $model->id),
+                    'edit_url' => route('admin.comcat.edit', $model->id),
+                    'delete_url' => route('admin.comcat.destroy', $model->id)
+                ]);
+            })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
     }
 }

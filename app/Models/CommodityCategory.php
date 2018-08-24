@@ -12,7 +12,7 @@ class CommodityCategory extends Model
 
     public function typeCom()
     {
-        return $this->belongsTo(TypeCommodity::class);
+        return $this->belongsTo(TypeCommodity::class, 'type_commodity_id');
     }
 
     public function com()

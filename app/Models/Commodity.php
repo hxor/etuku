@@ -12,7 +12,7 @@ class Commodity extends Model
 
     public function comCat()
     {
-        return $this->belongsTo(CommodityCategory::class);
+        return $this->belongsTo(CommodityCategory::class, 'commodity_category_id');
     }
 
     public function comUnit()

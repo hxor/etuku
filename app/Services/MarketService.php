@@ -26,9 +26,14 @@ class MarketService extends Services
         }
     }
 
+    public function find($id)
+    {
+        return $data = Market::find($id);
+    }
+
     public function read($id)
     {
-        $data = Market::find($id);
+        $data = $this->find($id);
 
         if ($data) {
             return response()->json([
@@ -49,7 +54,7 @@ class MarketService extends Services
     {
         $data = $this->read($id);
         if ($data) {
-            $update = Market::where('id', $id)->update($request->all());
+            $update = Market::where('id', $id)->update($request->except(['_method', '_token']));
             if ($update) {
                 return response()->json([
                     'success' => true,
@@ -97,5 +102,22 @@ class MarketService extends Services
                 'data' => ''
             ], 404);
         }
+    }
+
+    public function getTable()
+    {
+        $model = Market::query();
+        return $this->dataTable($model)
+            ->addColumn('action', function ($model) {
+                return view('layouts.partials._action', [
+                    'model' => $model,
+                    'show_url' => route('admin.market.show', $model->id),
+                    'edit_url' => route('admin.market.edit', $model->id),
+                    'delete_url' => route('admin.market.destroy', $model->id)
+                ]);
+            })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
     }
 }
