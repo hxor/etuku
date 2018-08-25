@@ -12,7 +12,7 @@ class CommoditiesTableSeeder extends Seeder
      */
     public function run()
     {
-        Commodity::truncate();
+        // Commodity::truncate();
 
         $data = [
             [

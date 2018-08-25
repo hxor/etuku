@@ -12,7 +12,7 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
-        Unit::truncate();
+        // Unit::truncate();
 
         $data = [
             ['slug' => 'kg', 'title' => 'Kg']

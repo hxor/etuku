@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+        // User::truncate();
 
         $data = [
             ['name' => 'Admin', 'email' => 'admin@mail.com', 'password' => bcrypt('password')]

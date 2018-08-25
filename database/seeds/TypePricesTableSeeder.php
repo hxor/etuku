@@ -12,7 +12,7 @@ class TypepriceTableSeeder extends Seeder
      */
     public function run()
     {
-        TypePrice::truncate();
+        // TypePrice::truncate();
 
         $data = [
             ['slug' => 'harga-grosir', 'title' => 'Harga Grosir'],

@@ -12,7 +12,7 @@ class TypeCommoditiesTableSeeder extends Seeder
      */
     public function run()
     {
-        TypeCom::truncate();
+        // TypeCom::truncate();
 
         $data = [
             ['slug' => 'bahan-pangan', 'title' => 'Bahan Pangan'],

@@ -12,7 +12,7 @@ class CommodityCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        ComCat::truncate();
+        // ComCat::truncate();
 
         $data = [
             [

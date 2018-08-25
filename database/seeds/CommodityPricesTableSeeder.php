@@ -12,7 +12,7 @@ class CommodityPricesTableSeeder extends Seeder
      */
     public function run()
     {
-        ComPrice::truncate();
+        // ComPrice::truncate();
 
         $data = [
             [

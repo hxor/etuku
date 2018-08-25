@@ -12,7 +12,7 @@ class MarketsTableSeeder extends Seeder
      */
     public function run()
     {
-        Market::truncate();
+        // Market::truncate();
 
         $data = [
             ['slug' => 'pasar-kanoman', 'title' => 'Pasar Kanoman'],
