@@ -29,7 +29,7 @@
                     </div>
                     <div class="panel-body table-responsive">
 
-                        {!! Form::model($data, ['route' => ['admin.commodity.update', $data->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($getData, ['route' => ['admin.commodity.update', $getData->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         
                             
                             @include('pages.commodity._form')

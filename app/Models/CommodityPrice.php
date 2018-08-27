@@ -34,4 +34,11 @@ class CommodityPrice extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+
+
+    protected $dates = [
+        'date',
+        'created_at',
+        'updated_at',
+    ];
 }

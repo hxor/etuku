@@ -44,7 +44,11 @@ class UnitController extends Controller
     public function store(UnitRequest $request)
     {
         $result = $this->srv->create($request);
-        if ($result) return redirect()->route('admin.unit.index');
+        if ($result['success']) {
+            return redirect()->route('admin.unit.index');
+        } else {
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
@@ -55,7 +59,12 @@ class UnitController extends Controller
      */
     public function show($id)
     {
-        return $this->srv->read($id);
+        $getData = $this->srv->find($id);
+        if (count($getData) > 0) {
+            return view('pages.unit.show', compact('getData'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -66,8 +75,12 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->srv->find($id);
-        return view('pages.unit.edit', compact('data'));
+        $getData = $this->srv->find($id);
+        if (count($getData) > 0) {
+            return view('pages.unit.edit', compact('getData'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,7 +93,11 @@ class UnitController extends Controller
     public function update(UnitRequest $request, $id)
     {
         $result = $this->srv->update($request, $id);
-        if ($result) return redirect()->route('admin.unit.index');
+        if ($result['success']) {
+            return redirect()->route('admin.unit.index');
+        } else {
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
@@ -92,7 +109,11 @@ class UnitController extends Controller
     public function destroy($id)
     {
         $result = $this->srv->delete($id);
-        if ($result) return redirect()->route('admin.unit.index');
+        if ($result['success']) {
+            return redirect()->route('admin.unit.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

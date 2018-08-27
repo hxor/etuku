@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>SiK<i class="md md-album"></i>ci</span></a>
+            <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>e-K<i class="md md-album"></i>moditas</span></a>
             <!-- Image Logo here -->
             <!--<a href="index.html" class="logo">-->
             <!--<i class="icon-c-logo"> <img src="{{ asset('assets/images/logo_sm.png') }}" height="42"/> </i>-->

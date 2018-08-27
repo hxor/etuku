@@ -12,17 +12,19 @@ class TypeComService extends Services
         $data = TypeCom::create($request->all());
 
         if ($data) {
-            return response()->json([
+            return [
                 'success' => true,
-                'message' => 'Added Successful!',
+                'message' => 'Successful!',
+                'status' => '201',
                 'data' => $data
-            ], 201);
+            ];
         } else {
-            return response()->json([
+            return [
                 'success' => false,
-                'message' => 'Added Fail!',
+                'message' => 'Fail!',
+                'status' => '400',
                 'data' => ''
-            ], 400);
+            ];
         }
     }
 
@@ -36,17 +38,19 @@ class TypeComService extends Services
         $data = $this->find($id);
 
         if ($data) {
-            return response()->json([
+            return [
                 'success' => true,
                 'message' => 'Successful!',
+                'status' => '200',
                 'data' => $data
-            ], 200);
+            ];
         } else {
-            return response()->json([
+            return [
                 'success' => false,
-                'message' => 'Fail!',
+                'message' => 'Not Found!',
+                'status' => '404',
                 'data' => ''
-            ], 404);
+            ];
         }
     }
 
@@ -56,24 +60,27 @@ class TypeComService extends Services
         if ($data) {
             $update = TypeCom::where('id', $id)->update($request->except(['_method', '_token']));
             if ($update) {
-                return response()->json([
+                return [
                     'success' => true,
                     'message' => 'Successful!',
+                    'status' => '201',
                     'data' => $update
-                ], 201);
+                ];
             } else {
-                return response()->json([
+                return [
                     'success' => false,
-                    'message' => 'Fail!',
+                    'message' => 'Update Fail!',
+                    'status' => '400',
                     'data' => ''
-                ], 404);
+                ];
             }
         } else {
-            return response()->json([
+            return [
                 'success' => false,
-                'message' => 'Fail!',
+                'message' => 'Not Found!',
+                'status' => '400',
                 'data' => ''
-            ], 404);
+            ];
         }
     }
 
@@ -83,24 +90,27 @@ class TypeComService extends Services
         if ($data) {
             $delete = TypeCom::where('id', $id)->delete();
             if ($delete) {
-                return response()->json([
+                return [
                     'success' => true,
                     'message' => 'Successful!',
+                    'status' => '201',
                     'data' => $delete
-                ], 201);
+                ];
             } else {
-                return response()->json([
+                return [
                     'success' => false,
-                    'message' => 'Fail!',
+                    'message' => 'Delete Fail!',
+                    'status' => '400',
                     'data' => ''
-                ], 404);
+                ];
             }
         } else {
-            return response()->json([
+            return [
                 'success' => false,
-                'message' => 'Fail!',
+                'message' => 'Not Found!',
+                'status' => '404',
                 'data' => ''
-            ], 404);
+            ];
         }
     }
 

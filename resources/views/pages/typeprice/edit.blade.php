@@ -24,12 +24,12 @@
                 <div class="panel panel-border panel-primary">
                     <div class="panel-heading">
                         <h5> 
-                            Ubah Data <span id="slug-target"></span>
+                            Ubah Data
                         </h5>
                     </div>
                     <div class="panel-body table-responsive">
 
-                        {!! Form::model($data, ['route' => ['admin.typeprice.update', $data->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($getData, ['route' => ['admin.typeprice.update', $getData->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         
                             
                             @include('pages.typeprice._form')

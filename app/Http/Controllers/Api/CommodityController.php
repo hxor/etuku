@@ -21,7 +21,7 @@ class CommodityController extends Controller
             'success' => true,
             'message' => 'Get Some Commodity',
             'data' => $comcat
-        ]);
+        ], 200);
     }
 
     public function show($id)

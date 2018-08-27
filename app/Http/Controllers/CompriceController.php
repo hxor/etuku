@@ -62,88 +62,12 @@ class CompriceController extends Controller
      */
     public function show($slug, $id)
     {
-        $current = $this->srv->find($id);
-        if ($current) {
-            $old = $current->where('type_price_id', $current->type_price_id)
-                    ->where('commodity_id', $current->commodity_id)
-                    ->where('market_id', $current->market_id)
-                    ->where('id', '<', $current->id)
-                    ->latest('id')
-                    ->first();
-            $new = $current->where('type_price_id', $current->type_price_id)
-                    ->where('commodity_id', $current->commodity_id)
-                    ->where('market_id', $current->market_id)
-                    ->where('id', '>', $current->id)
-                    ->get();
-            if (count($old) == 0 && count($new) == 0) {
-                $request['gap'] = 0;
-                $request['status'] = 'equal';
-
-                $result = Comprice::where('id', $id)->update($request->except(['_method', '_token']));
-                if ($result) {
-                    
-                    return [
-                        'success' => true,
-                        'message' => 'Successful!',
-                        'status' => '201',
-                        'data' => $result
-                    ];
-                } else {
-                    return [
-                        'success' => false,
-                        'message' => 'Fail!',
-                        'status' => '400',
-                        'data' => ''
-                    ];
-                }
-            } else if (count($old) == 0 && count($new) > 0 ) {
-                $request['gap'] = 0;
-                $request['status'] = 'equal';
-
-                $result = Comprice::where('id', $id)->update($request->except(['_method', '_token']));
-                if ($result) {
-                    $oldPrice = $result->price;
-                    foreach ($new as $row) {
-                        $child = Comprice::find($row->id);
-                        $newPrice = $child->price;
-
-                        if ($oldPrice == $newPrice) {
-                            $status = 'equal';
-                            $gap = 0;
-                        } elseif ($oldPrice < $newPrice) {
-                            $status = 'up';
-                            $gap = $newPrice - $oldPrice;
-                        } else {
-                            $status = 'down';
-                            $gap = $oldPrice - $newPrice;
-                        }
-                        $request['gap'] = $gap;
-                        $request['status'] = $status;
-
-                        $child->update($request);
-
-                        $oldPrice = $child->price;
-                    }
-                    return [
-                        'success' => true,
-                        'message' => 'Successful!',
-                        'status' => '201',
-                        'data' => $result
-                    ];
-                } else {
-                    return [
-                        'success' => false,
-                        'message' => 'Fail!',
-                        'status' => '400',
-                        'data' => ''
-                    ];
-                }
-                return 'Tidak ada yang di atas tapi ada yang di bawah';
-            } else if (count($old) > 0 && count($new) == 0) {
-                return 'Ada yang di atas tapi tidak ada yang di bawah';
-            } else {
-                return 'Ada yang di atas dan ada yang di bawah';
-            }
+        $getData = $this->srv->find($id);
+        if (count($getData) > 0) {
+            $data = $this->srv->getTypePrice($slug);
+            return view('pages.comprice.show', compact('getData', 'data'));
+        } else {
+            return redirect()->back();
         }
     }
 
@@ -156,8 +80,13 @@ class CompriceController extends Controller
     public function edit($slug, $id)
     {
         $data = $this->srv->getTypePrice($slug);
-        $model = $this->srv->find($id);
-        return view('pages.comprice.edit', compact('data', 'model'));
+        $getData = $this->srv->find($id);
+        if (count($getData) > 0) {
+            return view('pages.comprice.edit', compact('getData', 'data'));
+        } else {
+            return redirect()->back();
+        }
+        
     }
 
     /**
