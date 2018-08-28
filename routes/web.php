@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
    Route::resource('typecom', 'TypeComController');
    Route::resource('typeprice', 'TypePriceController');
    Route::resource('market', 'MarketController');
@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
    Route::resource('commodity', 'CommodityController');
    Route::resource('comprice', 'CompriceController');
    Route::resource('com/{slug}/price', 'CompriceController');
+   Route::resource('user', 'UserController');
+   Route::put('user/{id}/profile', 'UserController@updateProfile')->name('user.update.profile');
 });
 
 Route::group(['prefix' => 'table', 'as' => 'table.'], function () {
@@ -38,4 +40,5 @@ Route::group(['prefix' => 'table', 'as' => 'table.'], function () {
     Route::get('commodity', 'CommodityController@dataTable')->name('commodity');
     Route::get('unit', 'UnitController@dataTable')->name('unit');
     Route::get('com/{slug}/price', 'CompriceController@dataTable')->name('com.price');
+    Route::get('user', 'UserController@dataTable')->name('user');
 });

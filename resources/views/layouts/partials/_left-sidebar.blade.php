@@ -10,17 +10,19 @@
                     <a href="{{ route('home') }}" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
                 </li>
 
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-package"></i> <span> Data Master </span> <span class="menu-arrow"></span> </a>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('admin.market.index') }}">Pasar</a></li>
-                        <li><a href="{{ route('admin.typeprice.index') }}">Jenis Harga</a></li>
-                        <li><a href="{{ route('admin.typecom.index') }}">Jenis Komoditas</a></li>
-                        <li><a href="{{ route('admin.comcat.index') }}">Kategori Komoditas</a></li>
-                        <li><a href="{{ route('admin.commodity.index') }}">Komoditas</a></li>
-                        <li><a href="{{ route('admin.unit.index') }}">Satuan</a></li>
-                    </ul>
-                </li>
+                @if (Auth::user()->role == 'admin')
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-package"></i> <span> Data Master </span> <span class="menu-arrow"></span> </a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('admin.market.index') }}">Pasar</a></li>
+                            <li><a href="{{ route('admin.typeprice.index') }}">Jenis Harga</a></li>
+                            <li><a href="{{ route('admin.typecom.index') }}">Jenis Komoditas</a></li>
+                            <li><a href="{{ route('admin.comcat.index') }}">Kategori Komoditas</a></li>
+                            <li><a href="{{ route('admin.commodity.index') }}">Komoditas</a></li>
+                            <li><a href="{{ route('admin.unit.index') }}">Satuan</a></li>
+                        </ul>
+                    </li>
+                @endif
 
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="ti-wallet"></i> <span> Input Harga </span> <span class="menu-arrow"></span> </a>
@@ -30,6 +32,12 @@
                         @endforeach
                     </ul>
                 </li>
+
+                @if (Auth::user()->role == 'admin')
+                    <li class="">
+                        <a href="{{ route('admin.user.index') }}" class="waves-effect"><i class="ti-user"></i> <span> Users </span></a>
+                    </li>
+                @endif
 
             </ul>
             <div class="clearfix"></div>

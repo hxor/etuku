@@ -86,7 +86,7 @@ class UnitService extends Services
 
     public function delete($id)
     {
-        $data = $this->read($id);
+        $data = $this->find($id);
         if ($data) {
             $delete = Unit::where('id', $id)->delete();
             if ($delete) {

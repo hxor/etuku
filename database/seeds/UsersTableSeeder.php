@@ -15,7 +15,8 @@ class UsersTableSeeder extends Seeder
         // User::truncate();
 
         $data = [
-            ['name' => 'Admin', 'email' => 'admin@mail.com', 'password' => bcrypt('password')]
+            ['name' => 'Admin', 'email' => 'admin@mail.com', 'password' => bcrypt('password'), 'role' => 'admin'],
+            ['name' => 'User', 'email' => 'user@mail.com', 'password' => bcrypt('password'), 'role' => 'user']
         ];
 
         User::insert($data);

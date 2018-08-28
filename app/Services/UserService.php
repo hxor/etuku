@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use App\Services\Services;
-use App\Models\Market;
+use App\Models\User;
 
-class MarketService extends Services
+class UserService extends Services
 {
     public function create($request)
     {
-        $data = Market::create($request->all());
+        $request['password'] = bcrypt($request->password);
+        $data = User::create($request->all());
 
         if ($data) {
             return [
@@ -30,7 +31,7 @@ class MarketService extends Services
 
     public function find($id)
     {
-        return $data = Market::find($id);
+        return $data = User::find($id);
     }
 
     public function read($id)
@@ -58,7 +59,8 @@ class MarketService extends Services
     {
         $data = $this->find($id);
         if ($data) {
-            $update = Market::where('id', $id)->update($request->except(['_method', '_token']));
+            $request['password'] =  $request->password == null ? $data->password : bcrypt($request->password);
+            $update = User::where('id', $id)->update($request->except(['_method', '_token']));
             if ($update) {
                 return [
                     'success' => true,
@@ -88,7 +90,7 @@ class MarketService extends Services
     {
         $data = $this->read($id);
         if ($data) {
-            $delete = Market::where('id', $id)->delete();
+            $delete = User::where('id', $id)->delete();
             if ($delete) {
                 return [
                     'success' => true,
@@ -116,14 +118,14 @@ class MarketService extends Services
 
     public function getTable()
     {
-        $model = Market::query();
+        $model = User::query();
         return $this->dataTable($model)
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
-                    'show_url' => route('admin.market.show', $model->id),
-                    'edit_url' => route('admin.market.edit', $model->id),
-                    'delete_url' => route('admin.market.destroy', $model->id)
+                    'show_url' => route('admin.user.show', $model->id),
+                    'edit_url' => route('admin.user.edit', $model->id),
+                    'delete_url' => route('admin.user.destroy', $model->id)
                 ]);
             })
             ->rawColumns(['action'])

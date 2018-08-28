@@ -56,7 +56,7 @@ class TypePriceService extends Services
 
     public function update($request, $id)
     {
-        $data = $this->read($id);
+        $data = $this->find($id);
         if ($data) {
             $update = TypePrice::where('id', $id)->update($request->except(['_method', '_token']));
             if ($update) {
