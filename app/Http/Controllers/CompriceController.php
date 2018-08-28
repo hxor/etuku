@@ -47,9 +47,11 @@ class CompriceController extends Controller
     {
         $result = $this->srv->create($request);   
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             $data = $this->srv->getTypePrice($slug);
             return redirect()->route('admin.price.index', $data->slug);
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -100,9 +102,11 @@ class CompriceController extends Controller
     {
         $result = $this->srv->update($request, $id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             $data = $this->srv->getTypePrice($slug);
             return redirect()->route('admin.price.index', $data->slug);
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -118,8 +122,10 @@ class CompriceController extends Controller
         $data = $this->srv->getTypePrice($slug);
         $result = $this->srv->delete($id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.price.index', $data->slug);
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back();
         }
     }

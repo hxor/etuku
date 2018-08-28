@@ -45,8 +45,10 @@ class CommodityController extends Controller
     {
         $result = $this->srv->create($request);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.commodity.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -63,6 +65,7 @@ class CommodityController extends Controller
         if (count($getData) > 0) {
             return view('pages.commodity.show', compact('getData'));
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back();
         }
     }
@@ -79,6 +82,7 @@ class CommodityController extends Controller
         if (count($getData) > 0) {
             return view('pages.commodity.edit', compact('getData'));
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back();
         }
     }
@@ -94,8 +98,10 @@ class CommodityController extends Controller
     {
         $result = $this->srv->update($request, $id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.commodity.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -110,8 +116,10 @@ class CommodityController extends Controller
     {
         $result = $this->srv->delete($id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.commodity.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back();
         }
     }

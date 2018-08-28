@@ -46,8 +46,10 @@ class UserController extends Controller
     {
         $result = $this->srv->create($request);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.user.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -95,8 +97,10 @@ class UserController extends Controller
     {
         $result = $this->srv->update($request, $id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.user.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -135,8 +139,10 @@ class UserController extends Controller
     {
         $result = $this->srv->delete($id);
         if ($result['success']) {
+            $this->srv->notif($result['message'], 'success');
             return redirect()->route('admin.user.index');
         } else {
+            $this->srv->notif($result['message'], 'error');
             return redirect()->back();
         }
     }

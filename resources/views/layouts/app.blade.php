@@ -90,6 +90,18 @@
     <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/moment/moment.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/notifyjs/js/notify.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notifications/notify-metro.js') }}"></script>
+
+
+    <script>
+        $(function() {
+            @if(Session::has('message'))
+            $.Notification.autoHideNotify('{{ Session::get("type") }}', 'top right', '{{ ucwords(Session::get("type")) }}!','{{ Session::get("message") }}');
+            @endif
+        });
+    </script>
     
     
     @stack('scripts')
