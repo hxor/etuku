@@ -26,7 +26,11 @@
                 ->where('id', '<', $current->id)
                 ->latest('id')
                 ->first();
-            return $old->price;
+            if (count($old) > 0) {
+                return $old->price;
+            } else {
+                return '0';
+            }
         } else {
             return '0';
         }
