@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
+Route::get('/', 'PublicController@index');
+Route::get('/search', 'PublicController@search');
 
 Auth::routes();
 
