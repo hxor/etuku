@@ -17,8 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['namespace' => 'Api'], function () {
-    Route::get('/commodity', 'CommodityController@index');
-    Route::get('/commodity/{id}', 'CommodityController@show');
+Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
+    Route::group(['prefix' => 'market'], function () {
+        Route::get('/', 'MarketController@index');
+    });
+
+    Route::group(['prefix' => 'commodity'], function () {
+        Route::get('/{market}', 'CommodityController@getComByMarket');
+    });
 });
 
