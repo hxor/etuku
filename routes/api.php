@@ -25,5 +25,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
     Route::group(['prefix' => 'commodity'], function () {
         Route::get('/{market}', 'CommodityController@getComByMarket');
     });
-});
 
+    Route::group(['prefix' => 'price'], function () {
+        Route::get('market/{market}', 'CommodityController@getPriceByMarket');
+    });
+});
