@@ -10,6 +10,10 @@
                     <a href="{{ url('/') }}" class="waves-effect"><i class="ti-home"></i> <span> Beranda </span></a>
                 </li>
 
+                <li class="">
+                    <a href="{{ url('/login') }}" class="waves-effect"><i class="ti-shift-right"></i> <span> Login </span></a>
+                </li>
+
                 {{-- <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="ti-wallet"></i> <span> Cari Harga </span> <span class="menu-arrow"></span> </a>
                     <ul class="list-unstyled">

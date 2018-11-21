@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>e-TUKU</a>
+            <a href="{{ url('/') }}" class="logo"><i class="icon-magnet icon-c-logo"></i><span>e-TUKU</a>
             <!-- Image Logo here -->
             <!--<a href="index.html" class="logo">-->
             <!--<i class="icon-c-logo"> <img src="{{ asset('assets/images/logo_sm.png') }}" height="42"/> </i>-->
@@ -26,9 +26,6 @@
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="hidden-xs">
                         <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="icon-size-fullscreen"></i></a>
-                    </li>
-                    <li class="dropdown top-menu-item-xs">
-                        
                     </li>
                 </ul>
             </div>
