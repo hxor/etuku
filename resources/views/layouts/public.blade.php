@@ -62,7 +62,7 @@
             <!-- content -->
 
             <footer class="footer">
-                © {{ date('Y') }}. All rights reserved.
+                © {{ date('Y') }}. <a href="https://idstack.net">All rights reserved.</a>
             </footer>
 
         </div>

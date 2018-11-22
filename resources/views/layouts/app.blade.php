@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SiKoci - Sistem Informasi Komoditas Kota Cirebon">
+    <meta name="description" content="{{ config('app.name', 'Laravel') }}">
     <meta name="author" content="IDStack">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -62,7 +62,7 @@
             <!-- content -->
 
             <footer class="footer">
-                © {{ date('Y') }}. All rights reserved.
+                © {{ date('Y') }}. <a href="https://idstack.net">All rights reserved.</a>
             </footer>
 
         </div>

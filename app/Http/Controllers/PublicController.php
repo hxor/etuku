@@ -15,7 +15,7 @@ class PublicController extends Controller
     public function index()
     {
         $market = Market::first();
-        $typePrice = TypePrice::first();
+        $typePrice = TypePrice::where('slug', 'harga-ecer')->first();
         $comCat = ComCat::all();
         $comPrice = ComPrice::query();
 
