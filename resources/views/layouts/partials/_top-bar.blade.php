@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>e-TUKU</a>
+            <a href="{{ url('/home') }}" class="logo"><i class="icon-magnet icon-c-logo"></i><span>e-TUKU</a>
             <!-- Image Logo here -->
             <!--<a href="index.html" class="logo">-->
             <!--<i class="icon-c-logo"> <img src="{{ asset('assets/images/logo_sm.png') }}" height="42"/> </i>-->
@@ -22,6 +22,10 @@
                     </button>
                     <span class="clearfix"></span>
                 </div>
+
+                <ul class="nav navbar-nav hidden-xs">
+                    <li><a target="_blank" href="{{ url('/') }}" class="waves-effect waves-light">Halaman Depan</a></li>
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="hidden-xs">
